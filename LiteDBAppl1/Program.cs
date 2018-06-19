@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LiteDB;
 
 namespace LiteDBAppl1
 {
@@ -10,6 +6,17 @@ namespace LiteDBAppl1
     {
         static void Main(string[] args)
         {
+            using (var db = new LiteDatabase(@"CustomerData.db"))
+            {
+                var collection = db.GetCollection<Author>("authors");
+                var author = new Author
+                {
+                    FirstName = "Joydip",
+                    LastName = "Kanjilal",
+                    Address = "Hyderabad"
+                };
+                collection.Insert(author);
+            }
         }
     }
 }
